@@ -1,0 +1,51 @@
+/* 
+
+Switch to using SCSS, add to Gruntfile.  Define colors as constants, same values as OS X app .
+Break out into different files: note-choice-view, modals, etc
+
+*/
+
+#page-header-wrapper {
+    background: lightblue;
+}
+
+#notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#notes-container div[id^=note] {
+    border: thin black solid;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.8em;
+    text-align: center;
+    width: 4em;
+    margin: 2px;
+    padding: 2px;
+}
+
+#notes-container div[id^=note]:hover {
+    background: lightblue;
+}
+
+#note-ra, #note-me, #note-se, #note-le, #note-te {
+    background: black;
+    color: white;
+}
+#note-do, #note-re, #note-mi, #note-fa, #note-sol, #note-la, #note-ti {
+    background: white;
+    color: black;
+}
+
+#notes-and-buttons-view-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+
+#notes-and-buttons-view {
+    display: flex;
+    flex-flow: row nowrap;
+}

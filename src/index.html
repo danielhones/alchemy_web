@@ -3,58 +3,89 @@
   <head>
     <title>Alchemy Ear Training</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/buttons-min.css">
     <link rel="stylesheet" href="css/style-min.css">
   </head>
 
   <body>
-    <div id="page-wrapper">
-
-      <div id="page-header">
-	<!-- TODO: Put logo here -->
-	Alchemy Ear Training
+    <div id="page-wrapper" class="pure-g">
+      
+      <div id="page-header-wrapper" class="pure-u-1-1">
+	<div id="page-header">
+	  <!-- TODO: Put logo here -->
+	  Alchemy Ear Training
+	</div>
       </div>
 
       
-      <div id="app-wrapper">
+      <div id="app-view-wrapper" class="pure-u-1-1">
+	<div id="app-view" class="pure-g">
 
-	<div id="modal-buttons-wrapper">
-	  <div id="modal-buttons">
-	    Need buttons to launch the modals
+	  <div id="modal-buttons-wrapper" class="pure-u-1-1">
+	    <div id="modal-buttons">
+	      <div id="options-button" class="modal-button">Options</div>
+	      <div id="preferences-button" class="modal-button">Preferences</div>
+	    </div>
 	  </div>
-	</div>
-	
-	
-	<div id="note-choice-view-wrapper">
-	  <div id="note-choice-view">
-	    Here will need the note choice view (one column of notes, able to select multiple notes)
-	  </div>
-	</div>
 
-	
-	<div id="app-buttons-wrapper">
-	  <div id="app-buttons">
-	    Need buttons for controlling the app (same as OS X), maybe on the side and make narrow/icons for mobile
-	  </div>
-	</div>
-	
+	  <div class="pure-u-1-1">
+	    
+	    <div id="notes-and-buttons-view-wrapper">
 
-	<div id="options-view-wrapper" class="modal-wrapper">
-	  <div id="options-view" class="modal">
-	    Need modal for options (random cadence, major/minor, etc)
-	  </div>
-	</div>
-	
+	      <div id="notes-and-buttons-view" class="">
 
-	<div id="preferences-view-wrapper" class="modal-wrapper">
-	  <div id="preferences-view" class="modal">
-	    Need modal for the note preferences
-	  </div>
-	</div>
+		<div id="app-buttons-wrapper">
+		  <div id="app-buttons">
+		    <div id="repeat-question-button">Repeat Question</div>
+		    <div id="repeat-notes-button">Repeat Notes</div>
+		    <hr>
+		    <div id="next-question-button">Next Question</div>
+		    <div id="show-answer-button">Show Answer</div>
+		    <div id="check-answer-button">Check Answer</div>		  
+		    <div id="start-button">Start</div>
+		  </div>
+		</div>
+		
+		<div id="notes-container" class="center">
+		  <div id="note-ti">Ti</div>
+		  <div id="note-te">Te</div>
+		  <div id="note-la">La</div>
+		  <div id="note-le">Le</div>
+		  <div id="note-sol">Sol</div>
+		  <div id="note-se">Se</div>
+		  <div id="note-fa">Fa</div>
+		  <div id="note-mi">Mi</div>
+		  <div id="note-me">Me</div>
+		  <div id="note-re">Re</div>
+		  <div id="note-ra">Ra</div>
+		  <div id="note-do">Do</div>
+		</div>
+		
+	      </div>  <!-- #notes-and-buttons-view -->
 
-	
-      </div>  <!-- #app-wrapper -->
+	    </div>  <!-- #notes-and-buttons-view-wrapper -->
+	    
+	  </div>  <!-- grid column -->
+	  	  	  
+	</div>  <!-- #app-view -->
+      </div>  <!-- #app-view-wrapper -->
+
+      <!-- modals -->
+      <div id="options-view-wrapper" class="modal-wrapper" style="display: none;">
+	<div id="options-view" class="modal">
+	  Need modal for options (random cadence, major/minor, etc)
+	</div>
+      </div>
       
-    </div>  <!-- body -->
+      <div id="preferences-view-wrapper" class="modal-wrapper" style="display: none;">
+	<div id="preferences-view" class="modal">
+	  Need modal for the note preferences
+	</div>
+      </div>
+      <!-- end of modals -->
+      
+    </div>  <!-- #page-wrapper -->
   </body>
 </html>

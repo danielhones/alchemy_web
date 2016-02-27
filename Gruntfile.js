@@ -40,6 +40,10 @@ module.exports = function(grunt) {
 		files: ['src/css/*.css'],
 		tasks: ['cssmin'],
 	    },
+	    html: {
+		files: ['src/*.html'],
+		tasks: ['htmlmin']
+	    },
 	},
     });
 
