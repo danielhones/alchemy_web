@@ -13,10 +13,12 @@ Break out into different files: note-choice-view, modals, etc
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 1em;
+    margin-bottom: 3em;
 }
 #notes-container div[id^=note] {
     border: thin black solid;
-    border-radius: 6px;
+    border-radius: 0px;
     cursor: pointer;
     font-size: 1.8em;
     text-align: center;
@@ -48,4 +50,29 @@ Break out into different files: note-choice-view, modals, etc
 #notes-and-buttons-view {
     display: flex;
     flex-flow: row nowrap;
+}
+
+#app-buttons-wrapper {
+    margin-right: 2em;
+}
+
+#app-buttons div[id$=button] {
+    text-align: center;
+    cursor: pointer;
+    border: thin black solid;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    margin: 4px;
+    padding: 2px .5em 2px;
+}
+
+@media (max-width: 800px) {
+    /* Slightly smaller fonts for mobile */
+    #notes-container div[id^=note] {
+	font-size: 1.4em;
+    }
+    #app-buttons div[id$=button] {
+	font-size: 1.2em;
+    }
+    
 }
