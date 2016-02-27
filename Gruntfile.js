@@ -1,26 +1,33 @@
 module.exports = function(grunt) {
     grunt.initConfig({
+	concat: {
+	    get_comments: {
+		src: ['src/js/alchemy.js'],
+		dest: 'src/concat/alchemy.js',
+	    },
+	},
+
 	uglify: {
 	    my_target: {
 		files: {
-		    'build/alchemy.min.js': ['src/alchemy.js'],
+		    'build/js/alchemy.min.js': ['src/concat/alchemy.js'],
 		}
 	    }
 	},
 	cssmin: {
 	    target: {
 		files: {
-		    'build/style-min.css': ['src/style.css']
+		    'build/css/style-min.css': ['src/css/style.css']
 		}
 	    },
 	},
 	watch: {
 	    js: {
-		files: ['src/*.js'],
+		files: ['src/js/*.js'],
 		tasks: ['uglify'],
 	    },
 	    css: {
-		files: ['src/*.css'],
+		files: ['src/css/*.css'],
 		tasks: ['cssmin'],
 	    },
 	},
