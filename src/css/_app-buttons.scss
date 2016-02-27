@@ -1,0 +1,40 @@
+#app-buttons-wrapper {
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-right: 4em;
+}
+
+#app-buttons {
+    padding-top: 0px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#app-buttons button[id$=button] {/*
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1.4rem;*/
+    margin-top: 3px;
+    margin-bottom: 7px;
+/*    padding: 2px .5em 2px;*/
+    width: 100%;
+}
+
+#app-buttons hr {
+    width: 100%;
+}
+
+#start-button {
+    width: 4em !important;
+}
+
+
+
+@media (max-width: 800px) {
+    #app-buttons div[id$=button] {
+	font-size: 1.2em;
+    }
+}

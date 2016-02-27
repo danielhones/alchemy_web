@@ -12,22 +12,32 @@ module.exports = function(grunt) {
 	    }
 	},
 	concat: {
-	    get_comments: {
+	    app: {
 		src: ['src/js/alchemy.js'],
-		dest: 'src/concat/alchemy.js',
+		dest: 'staging/alchemy.js',
 	    },
 	},
 	uglify: {
 	    my_target: {
 		files: {
-		    'build/js/alchemy.min.js': ['src/concat/alchemy.js'],
+		    'build/js/alchemy.min.js': ['staging/alchemy.js'],
+		}
+	    }
+	},
+	sass: {
+	    build: {
+		options: {
+		    style: 'expanded' // i dunno
+		},
+		files: {
+		    "staging/style.css": "src/css/main.scss"
 		}
 	    }
 	},
 	cssmin: {
 	    target: {
 		files: {
-		    'build/css/style-min.css': ['src/css/style.css']
+		    'build/css/style-min.css': ['staging/style.css']
 		}
 	    },
 	},
@@ -37,8 +47,8 @@ module.exports = function(grunt) {
 		tasks: ['uglify'],
 	    },
 	    css: {
-		files: ['src/css/*.css'],
-		tasks: ['cssmin'],
+		files: ['src/css/*.scss'],
+		tasks: ['sass', 'cssmin'],
 	    },
 	    html: {
 		files: ['src/*.html'],
@@ -47,12 +57,13 @@ module.exports = function(grunt) {
 	},
     });
 
-    grunt.registerTask('build', ['htmlmin', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('build', ['htmlmin', 'concat', 'uglify', 'sass', 'cssmin']);
     grunt.registerTask('default', ['build', 'watch']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 };

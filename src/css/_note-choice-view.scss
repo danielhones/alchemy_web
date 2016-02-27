@@ -1,13 +1,4 @@
-/* 
-
-Switch to using SCSS, add to Gruntfile.  Define colors as constants, same values as OS X app .
-Break out into different files: note-choice-view, modals, etc
-
-*/
-
-#page-header-wrapper {
-    background: lightblue;
-}
+$note_button_hover_color: lightblue;
 
 #notes-container {
     display: flex;
@@ -16,7 +7,8 @@ Break out into different files: note-choice-view, modals, etc
     margin-right: 1em;
     margin-bottom: 3em;
 }
-#notes-container div[id^=note] {
+
+#notes-container button[id^=note] {
     border: thin black solid;
     border-radius: 0px;
     cursor: pointer;
@@ -27,14 +19,15 @@ Break out into different files: note-choice-view, modals, etc
     padding: 2px;
 }
 
-#notes-container div[id^=note]:hover {
-    background: lightblue;
+#notes-container button[id^=note]:hover {
+    background: $note_button_hover_color;
 }
 
 #note-ra, #note-me, #note-se, #note-le, #note-te {
     background: black;
     color: white;
 }
+
 #note-do, #note-re, #note-mi, #note-fa, #note-sol, #note-la, #note-ti {
     background: white;
     color: black;
@@ -52,27 +45,8 @@ Break out into different files: note-choice-view, modals, etc
     flex-flow: row nowrap;
 }
 
-#app-buttons-wrapper {
-    margin-right: 2em;
-}
-
-#app-buttons div[id$=button] {
-    text-align: center;
-    cursor: pointer;
-    border: thin black solid;
-    border-radius: 6px;
-    font-size: 1.4rem;
-    margin: 4px;
-    padding: 2px .5em 2px;
-}
-
 @media (max-width: 800px) {
-    /* Slightly smaller fonts for mobile */
     #notes-container div[id^=note] {
 	font-size: 1.4em;
     }
-    #app-buttons div[id$=button] {
-	font-size: 1.2em;
-    }
-    
 }

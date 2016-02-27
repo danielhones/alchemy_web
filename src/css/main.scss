@@ -1,0 +1,14 @@
+$header_bg_color: lightblue;
+$bg_color: #efefef;
+
+@import 'note-choice-view';
+@import 'app-buttons';
+
+
+body {
+    background: $bg_color;
+}
+
+#page-header-wrapper {
+    background: $header_bg_color;
+}
