@@ -12,14 +12,9 @@
     align-items: center;
 }
 
-#app-buttons button[id$=button] {/*
-    text-align: center;
-    cursor: pointer;
-    border-radius: 6px;
-    font-size: 1.4rem;*/
+#app-buttons button[id$=button] {
     margin-top: 3px;
     margin-bottom: 7px;
-/*    padding: 2px .5em 2px;*/
     width: 100%;
 }
 

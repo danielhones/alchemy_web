@@ -13,22 +13,22 @@ module.exports = function(grunt) {
 	},
 	concat: {
 	    app: {
-		src: ['src/js/alchemy.js'],
-		dest: 'staging/alchemy.js',
+		src: ['src/js/alchemy.js', 'src/js/app-controller.js'],
+		dest: 'build/js/alchemy.min.js',  // TODO: for production, change dest to 'staging/alchemy.js'
 	    },
 	},
 	uglify: {
-	    my_target: {
+	    options: {
+		mangle: false
+	    },
+	    app: {
 		files: {
-		    'build/js/alchemy.min.js': ['staging/alchemy.js'],
+		    //'build/js/alchemy.min.js': ['staging/alchemy.js'],  // TODO: for production, uncomment this line
 		}
 	    }
 	},
 	sass: {
 	    build: {
-		options: {
-		    style: 'expanded' // i dunno
-		},
 		files: {
 		    "staging/style.css": "src/css/main.scss"
 		}
@@ -44,10 +44,10 @@ module.exports = function(grunt) {
 	watch: {
 	    js: {
 		files: ['src/js/*.js'],
-		tasks: ['uglify'],
+		tasks: ['uglify', 'concat'],
 	    },
 	    css: {
-		files: ['src/css/*.scss'],
+		files: ['src/css/*.scss', 'src/css/*.css'],
 		tasks: ['sass', 'cssmin'],
 	    },
 	    html: {
