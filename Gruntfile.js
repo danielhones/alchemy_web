@@ -60,12 +60,20 @@ module.exports = function(grunt) {
 		tasks: ['htmlmin']
 	    },
 	},
+	copy: {
+	    main: {
+		files: [
+		    {expand: true, cwd: 'src/audio', src: ['**'], dest: 'build/audio'},
+		],
+	    },
+	},
     });
 
-    grunt.registerTask('build', ['htmlmin', 'concat', 'uglify', 'sass', 'cssmin']);
+    grunt.registerTask('build', ['htmlmin', 'concat', 'uglify', 'sass', 'cssmin', 'copy']);
     grunt.registerTask('default', ['build', 'watch']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-sass');

@@ -1,5 +1,4 @@
 var AppController = function AppController() {
-    // Buttons
     var repeat_question_button = document.getElementById("repeat-question-button");
     var repeat_notes_button = document.getElementById("repeat-notes-button");
     var next_question_button = document.getElementById("next-question-button");
@@ -13,7 +12,6 @@ var AppController = function AppController() {
     var preferences = new AlchemyPreferences();
     var question = new AlchemyQuestion();
     var selected_notes = [];  // This is an array containing the indexes of selected note buttons
-//    var question = new Question();
     
     var that = this;
 
@@ -54,11 +52,12 @@ var AppController = function AppController() {
     function repeat_question(event) {}
     function repeat_notes(event) {}
     function next_question(event) {}
-    function show_answer(event) {}
+    function show_answer(event) {};
+    
     function check_answer(event) {
 	var answer_is_right = question.check_answer(selected_notes);
 	if (answer_is_right) {
-	    
+
 	} else {
 
 	}
@@ -66,6 +65,11 @@ var AppController = function AppController() {
     
     function start_session(event) {
 	hide_start_and_enable_others();
+    }
+
+    function stop_session() {
+	question.stop_sound();
+	show_start_and_disable_others();
     }
 
     function note_button_click(event) {
