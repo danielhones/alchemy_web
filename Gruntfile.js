@@ -13,7 +13,12 @@ module.exports = function(grunt) {
 	},
 	concat: {
 	    app: {
-		src: ['src/js/alchemy.js', 'src/js/app-controller.js'],
+		src: ['src/js/constants.js',
+		      'src/js/utilities.js',
+		      'src/js/options.js',
+		      'src/js/preferences.js',
+		      'src/js/question.js',
+		      'src/js/app_controller.js'],
 		dest: 'build/js/alchemy.min.js',  // TODO: for production, change dest to 'staging/alchemy.js'
 	    },
 	},

@@ -1,0 +1,3 @@
+var AlchemyPreferences = function AlchemyPreferences() {
+
+};

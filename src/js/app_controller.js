@@ -1,12 +1,3 @@
-// From this StackOverflow answer - http://stackoverflow.com/a/1063027/3199099
-function sort_number(a, b) {
-    return a - b;
-}
-
-
-// Add cookie handler function
-
-
 var AppController = function AppController() {
     // Buttons
     var repeat_question_button = document.getElementById("repeat-question-button");
@@ -15,18 +6,36 @@ var AppController = function AppController() {
     var show_answer_button = document.getElementById("show-answer-button");
     var check_answer_button = document.getElementById("check-answer-button");
     var start_button = document.getElementById("start-button");
+    var app_buttons = document.querySelectorAll("#app-buttons button");
     var note_buttons = document.querySelectorAll("#notes-container button[id^=note]");
 
-    // Instance variables
-    // TODO: add var to this after debugging:
-    selected_notes = [];  // This is an array containing the indexes of selected note buttons
-    var number_of_notes = 3;  // Read this setting from cookie
+    var options = new AlchemyOptions();
+    var preferences = new AlchemyPreferences();
+    var question = new AlchemyQuestion();
+    var selected_notes = [];  // This is an array containing the indexes of selected note buttons
+//    var question = new Question();
     
     var that = this;
 
     this.initialize = function initialize() {
 	register_click_functions();
+	show_start_and_disable_others();
     };
+
+    function show_start_and_disable_others() {
+	for (var i = 0; i < app_buttons.length; i++) {
+	    app_buttons[i].disabled = true;
+	}
+	start_button.disabled = false;
+	start_button.style.visibility = "visible";
+    }
+
+    function hide_start_and_enable_others() {
+	for (var i = 0; i < app_buttons.length; i++) {
+	    app_buttons[i].disabled = false;
+	}
+	start_button.style.visibility = "hidden";
+    }
 
     function register_click_functions() {
 	repeat_question_button.onclick = repeat_question;
@@ -41,13 +50,23 @@ var AppController = function AppController() {
 	    note_buttons[i].onclick = note_button_click;
 	}
     }
-    
+
     function repeat_question(event) {}
     function repeat_notes(event) {}
     function next_question(event) {}
     function show_answer(event) {}
-    function check_answer(event) {}
-    function start_session(event) {}
+    function check_answer(event) {
+	var answer_is_right = question.check_answer(selected_notes);
+	if (answer_is_right) {
+	    
+	} else {
+
+	}
+    }
+    
+    function start_session(event) {
+	hide_start_and_enable_others();
+    }
 
     function note_button_click(event) {
 	var was_selected = this.getAttribute("data-selected").toLowerCase();
@@ -56,7 +75,7 @@ var AppController = function AppController() {
 	if (was_selected === "true") {
 	    selected_notes.splice(selected_notes.indexOf(note_index), 1);
 	    this.setAttribute("data-selected", "false");
-	} else if (selected_notes.length < number_of_notes) {
+	} else if (selected_notes.length < options.num_notes) {
 	    selected_notes.push(note_index);
 	    this.setAttribute("data-selected", "true");
 	}
