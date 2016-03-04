@@ -17,8 +17,24 @@ var AppController = function AppController() {
 
     this.initialize = function initialize() {
 	register_click_functions();
+	options.load_values();
+	preferences.load_values();
 	show_start_and_disable_others();
     };
+
+    function register_click_functions() {
+	repeat_question_button.onclick = repeat_question;
+	repeat_notes_button.onclick = repeat_notes;
+	next_question_button.onclick = next_question;
+	show_answer_button.onclick = show_answer;
+	check_answer_button.onclick = check_answer;
+	start_button.onclick = start_session;
+
+	for (var i = 0; i < note_buttons.length; i++) {
+	    note_buttons[i].setAttribute("data-selected", "false");
+	    note_buttons[i].onclick = note_button_click;
+	}
+    }
 
     function show_start_and_disable_others() {
 	for (var i = 0; i < app_buttons.length; i++) {
@@ -35,29 +51,22 @@ var AppController = function AppController() {
 	start_button.style.visibility = "hidden";
     }
 
-    function register_click_functions() {
-	repeat_question_button.onclick = repeat_question;
-	repeat_notes_button.onclick = repeat_notes;
-	next_question_button.onclick = next_question;
-	show_answer_button.onclick = show_answer;
-	check_answer_button.onclick = check_answer;
-	start_button.onclick = start_session;
-
+    function reset_note_buttons() {
 	for (var i = 0; i < note_buttons.length; i++) {
 	    note_buttons[i].setAttribute("data-selected", "false");
-	    note_buttons[i].onclick = note_button_click;
 	}
     }
 
     function repeat_question(event) {}
     function repeat_notes(event) {}
     function next_question(event) {}
-    function show_answer(event) {};
+    function show_answer(event) {}
     
     function check_answer(event) {
 	var answer_is_right = question.check_answer(selected_notes);
+	console.log("answer_is_right:", answer_is_right);
 	if (answer_is_right) {
-
+	    
 	} else {
 
 	}

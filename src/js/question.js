@@ -1,13 +1,25 @@
 var AlchemyQuestion = function AlchemyQuestion() {
+    var DURATION_OF_CADENCE = 4000;
     var notes = [
-	//new Audio('audio/C4.ogg'),
+	new Audio('audio/notes/C4.ogg'),
+	new Audio('audio/notes/Db4.ogg'),
+	new Audio('audio/notes/D4.ogg'),
+	new Audio('audio/notes/Eb4.ogg'),
+	new Audio('audio/notes/E4.ogg'),	
+	new Audio('audio/notes/F4.ogg'),
+	new Audio('audio/notes/Gb4.ogg'),
+	new Audio('audio/notes/G4.ogg'),
+	new Audio('audio/notes/Ab4.ogg'),
+	new Audio('audio/notes/A4.ogg'),
+	new Audio('audio/notes/Bb4.ogg'),
+	new Audio('audio/notes/B4.ogg')
     ];
     var cadences = {};
-    cadences[MAJOR] = [];
-    cadences[MINOR] = [];
+    cadences[MAJOR] = [new Audio('audio/cadences/Cmajor.ogg')];
+    cadences[MINOR] = [new Audio('audio/cadences/Cminor.ogg')];
     var current_cadence = 0;  // For now we only use the key of C major or minor
     var current_notes = [];
-    var tonality;
+    var tonality = MAJOR;
     var that = this;
 
     this.set_tonality = function(new_tonality) {
@@ -31,30 +43,21 @@ var AlchemyQuestion = function AlchemyQuestion() {
     };
 
     this.play_question = function() {
-	play_cadence();
-	that.play_notes();
+	cadences[tonality][current_cadence].play();
+	setTimeout(that.play_notes, DURATION_OF_CADENCE);
     };
 
     this.play_notes = function() {
 	console.log("played notes: ", current_notes);
-	/*
 	current_notes.forEach(function(note_index) {
 	    notes[note_index].play();
 	});
-	*/
     };
 
     this.stop_sound = function() {
-	/*
 	current_notes.forEach(function(note_index) {
 	    notes[note_index].stop();
 	});
 	cadences[tonality][current_cadence].stop();
-	*/
     };
-
-    function play_cadence() {
-	console.log("played cadence");
- 	// cadences[tonality][current_cadence].play()
-    }
 };
