@@ -1,11 +1,26 @@
 $note_button_hover_color: rgba(0, 128, 255, 0.7);
 $selected_note_button_color: rgba(0, 128, 255, 0.8);
+$wrong_note_color: rgba(229, 0, 0, 0.7);
+$right_note_color: rgba(0, 189, 56, 0.6);
+$answer_note_color: rgba(255, 158, 0, 0.8);
 $dark_note_color: #0a0a0a;
 $light_note_color: #fefefe;
 
 
-button[data-selected=true] {
+button[data-status=selected] {
     background: $selected_note_button_color !important;
+}
+
+button[data-status=wrong] {
+    background: $wrong_note_color !important;
+}
+
+button[data-status=right] {
+    background: $right_note_color !important;
+}
+
+button[data-status=answer] {
+    background: $answer_note_color !important;
 }
 
 #notes-container {

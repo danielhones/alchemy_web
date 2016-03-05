@@ -26,29 +26,23 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	tonality = new_tonality;
     };
     
-    this.select_new_notes = function(num_notes, allowed_notes) {
-	var available_notes = allowed_notes.slice(0, allowed_notes.length);
-	current_notes = [];
-	
-	for (var i = 0; i < num_notes; i++) {
-	    var random_choice = Math.floor(Math.random() * available_notes.length);
-	    var new_note = available_notes.splice(random_choice, 1)[0];
-	    current_notes.push(new_note);
-	}
-	current_notes.sort(sort_number);
+    this.check_answer = function(answer) {
+	console.log("Checking answer: ", answer);
+	return array_difference(answer, current_notes);
     };
 
-    this.check_answer = function(answer) {
-	return (current_notes.sort(sort_number).toString() === answer.sort(sort_number).toString());
+    this.play_new_question = function(num_notes, allowed_notes) {
+	select_new_notes(num_notes, allowed_notes);
+	that.play_question();
     };
 
     this.play_question = function() {
+	console.log("Current notes: ", current_notes);
 	cadences[tonality][current_cadence].play();
 	setTimeout(that.play_notes, DURATION_OF_CADENCE);
     };
 
     this.play_notes = function() {
-	console.log("played notes: ", current_notes);
 	current_notes.forEach(function(note_index) {
 	    notes[note_index].play();
 	});
@@ -60,4 +54,17 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	});
 	cadences[tonality][current_cadence].stop();
     };
+
+    function select_new_notes(num_notes, allowed_notes) {
+	var available_notes = allowed_notes.slice();
+	current_notes = [];
+	
+	for (var i = 0; i < num_notes; i++) {
+	    var random_choice = Math.floor(Math.random() * available_notes.length);
+	    var new_note = available_notes.splice(random_choice, 1)[0];
+	    current_notes.push(new_note);
+	}
+	current_notes.sort(sort_number);
+    };
+
 };

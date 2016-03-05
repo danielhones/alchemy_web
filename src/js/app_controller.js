@@ -12,7 +12,9 @@ var AppController = function AppController() {
     var preferences = new AlchemyPreferences();
     var question = new AlchemyQuestion();
     var selected_notes = [];  // This is an array containing the indexes of selected note buttons
-    
+    var total_questions = 0;
+    var play_cadence_this_time = true;
+    var number_right = 0;
     var that = this;
 
     this.initialize = function initialize() {
@@ -31,7 +33,7 @@ var AppController = function AppController() {
 	start_button.onclick = start_session;
 
 	for (var i = 0; i < note_buttons.length; i++) {
-	    note_buttons[i].setAttribute("data-selected", "false");
+	    note_buttons[i].setAttribute("data-status", "none");
 	    note_buttons[i].onclick = note_button_click;
 	}
     }
@@ -53,7 +55,7 @@ var AppController = function AppController() {
 
     function reset_note_buttons() {
 	for (var i = 0; i < note_buttons.length; i++) {
-	    note_buttons[i].setAttribute("data-selected", "false");
+	    note_buttons[i].setAttribute("data-status", "none");
 	}
     }
 
@@ -63,38 +65,57 @@ var AppController = function AppController() {
     function show_answer(event) {}
     
     function check_answer(event) {
-	var answer_is_right = question.check_answer(selected_notes);
-	console.log("answer_is_right:", answer_is_right);
-	if (answer_is_right) {
-	    
-	} else {
+	console.log("selected notes: ", selected_notes);
+	var wrong_notes = question.check_answer(selected_notes);
+	console.log("Wrong notes: ", wrong_notes);
 
+	if (wrong_notes.length === 0) {
+	    highlight_notes(selected_notes, GREEN);
+	    total_questions++;
+	    number_right++;
+	    play_new_question();
+	} else {
+	    var right_notes = array_difference(selected_notes, wrong_notes);
+	    console.log("Right notes: ", right_notes);
+	    highlight_notes(right_notes, GREEN);
+	    highlight_notes(wrong_notes, RED);
 	}
     }
-    
+
     function start_session(event) {
 	hide_start_and_enable_others();
+	play_cadence_this_time = true;
+	total_questions--;
+	play_new_question();
     }
-
+    
     function stop_session() {
 	question.stop_sound();
 	show_start_and_disable_others();
     }
 
+    function play_new_question() {
+	question.play_new_question(options.num_notes, preferences.available_notes[options.tonality]);
+    }
+
     function note_button_click(event) {
-	var was_selected = this.getAttribute("data-selected").toLowerCase();
+	var was_selected = (this.getAttribute("data-status").toLowerCase() === "selected");
 	var note_index = parseInt(this.getAttribute("data-note-index"), 10);
 
 	if (was_selected === "true") {
 	    selected_notes.splice(selected_notes.indexOf(note_index), 1);
-	    this.setAttribute("data-selected", "false");
+	    this.setAttribute("data-status", "none");
 	} else if (selected_notes.length < options.num_notes) {
 	    selected_notes.push(note_index);
-	    this.setAttribute("data-selected", "true");
+	    this.setAttribute("data-status", "selected");
 	}
 	
 	selected_notes.sort(sort_number);
 	return note_index;
+    }
+
+    function highlight_notes(notes, status) {
+	
     }
 
 };
