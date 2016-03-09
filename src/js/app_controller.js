@@ -15,6 +15,15 @@ var AppController = function AppController() {
     var total_questions = 0;
     var play_cadence_this_time = true;
     var number_right = 0;
+
+    // Constants for setting note button status:
+    var SELECTED_STATUS = "selected";
+    var NO_STATUS = "none";
+    var RIGHT_STATUS = "right";
+    var WRONG_STATUS = "wrong";
+    var ANSWER_STATUS = "answer";
+    var TIME_AFTER_ANSWER_CHECK = 2000;
+    
     var that = this;
 
     this.initialize = function initialize() {
@@ -54,32 +63,53 @@ var AppController = function AppController() {
     }
 
     function reset_note_buttons() {
+	selected_notes = [];
 	for (var i = 0; i < note_buttons.length; i++) {
-	    note_buttons[i].setAttribute("data-status", "none");
+	    note_buttons[i].setAttribute("data-status", NO_STATUS);
 	}
     }
 
-    function repeat_question(event) {}
-    function repeat_notes(event) {}
-    function next_question(event) {}
-    function show_answer(event) {}
+    function repeat_question(event) {
+	question.play_question();
+    }
+    
+    function repeat_notes(event) {
+	question.play_notes();
+    }
+    
+    function next_question(event) {
+	show_answer();
+	play_new_question();
+    }
+    
+    function show_answer(event) {
+	var answer = question.get_answer();
+	set_notes(answer, ANSWER_STATUS);
+	selected_notes = [];
+    }
     
     function check_answer(event) {
-	console.log("selected notes: ", selected_notes);
+	if (selected_notes.length === 0) {
+	    return;
+	}
+	
 	var wrong_notes = question.check_answer(selected_notes);
 	console.log("Wrong notes: ", wrong_notes);
 
 	if (wrong_notes.length === 0) {
-	    highlight_notes(selected_notes, GREEN);
+	    set_notes(selected_notes, RIGHT_STATUS);
 	    total_questions++;
 	    number_right++;
 	    play_new_question();
+	    setTimeout(reset_note_buttons, TIME_AFTER_ANSWER_CHECK);
 	} else {
 	    var right_notes = array_difference(selected_notes, wrong_notes);
 	    console.log("Right notes: ", right_notes);
-	    highlight_notes(right_notes, GREEN);
-	    highlight_notes(wrong_notes, RED);
+	    set_notes(right_notes, RIGHT_STATUS);
+	    set_notes(wrong_notes, WRONG_STATUS);
+	    setTimeout(function(){set_notes(selected_notes, SELECTED_STATUS);}, TIME_AFTER_ANSWER_CHECK);
 	}
+
     }
 
     function start_session(event) {
@@ -99,27 +129,30 @@ var AppController = function AppController() {
     }
 
     function note_button_click(event) {
-	var was_selected = (this.getAttribute("data-status").toLowerCase() === "selected");
+	var was_selected = (this.getAttribute("data-status").toLowerCase() === SELECTED_STATUS);
 	var note_index = parseInt(this.getAttribute("data-note-index"), 10);
 
-	if (was_selected === "true") {
+	if (was_selected === true) {
 	    selected_notes.splice(selected_notes.indexOf(note_index), 1);
-	    this.setAttribute("data-status", "none");
+	    this.setAttribute("data-status", NO_STATUS);
 	} else if (selected_notes.length < options.num_notes) {
 	    selected_notes.push(note_index);
-	    this.setAttribute("data-status", "selected");
+	    this.setAttribute("data-status", SELECTED_STATUS);
 	}
 	
 	selected_notes.sort(sort_number);
 	return note_index;
     }
 
-    function highlight_notes(notes, status) {
-	
+    function set_notes(notes, status) {
+	notes.forEach(function(note_index) {
+	    note_buttons[note_index].setAttribute("data-status", status);
+	});
     }
 
 };
 
 
+remove_hover_effect_for_touch_devices("/css/style-min.css");
 var app = new AppController();
 app.initialize();

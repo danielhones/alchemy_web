@@ -9,5 +9,30 @@ function array_difference(a, b) {
     return a.filter(function(i) { return b.indexOf(i) < 0; });
 }
 
+function remove_hover_effect_for_touch_devices(css_name) {
+    // From this SO answer - http://stackoverflow.com/a/15439809/3199099
+    var is_touch_device = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
+
+    if (is_touch_device) {
+	var stylesheet = false;
+	for (var i = 0; i < document.styleSheets.length; i++) {
+	    if (document.styleSheets[i].href.endsWith(css_name)) {
+		stylesheet = document.styleSheets[i];
+		break;
+	    }
+	}
+	if (stylesheet === false) {
+	    return false;  // didn't find stylesheet
+	}
+	for (var i = 0; i < stylesheet.cssRules.length; i++) {
+	    var rule_matches = (stylesheet.cssRules[i].selectorText !== undefined &&
+				stylesheet.cssRules[i].selectorText.indexOf(":hover") !== -1);
+	    if (rule_matches) {
+		stylesheet.deleteRule(i);
+	    }
+	}
+    }
+}
+
 // Add cookie handler function
 
