@@ -28,7 +28,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
     };
     
     this.check_answer = function(answer) {
-	if (answer.length === 0) {
+	if (answer.length !== current_notes.length) {
 	    return false;
 	}
 	console.log("Checking answer: ", answer);
