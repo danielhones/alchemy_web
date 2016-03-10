@@ -12,9 +12,7 @@ var AppController = function AppController() {
     var preferences = new AlchemyPreferences();
     var question = new AlchemyQuestion();
     var selected_notes = [];  // This is an array containing the indexes of selected note buttons
-    var total_questions = 0;
     var play_cadence_this_time = true;
-    var number_right = 0;
 
     // Constants for setting note button status:
     var SELECTED_STATUS = "selected";
@@ -28,8 +26,6 @@ var AppController = function AppController() {
 
     this.initialize = function initialize() {
 	register_click_functions();
-	options.load_values();
-	preferences.load_values();
 	show_start_and_disable_others();
     };
 
@@ -98,8 +94,6 @@ var AppController = function AppController() {
 
 	if (wrong_notes.length === 0) {
 	    set_notes(selected_notes, RIGHT_STATUS);
-	    total_questions++;
-	    number_right++;
 	    play_new_question();
 	    setTimeout(reset_note_buttons, TIME_AFTER_ANSWER_CHECK);
 	} else {
@@ -115,7 +109,6 @@ var AppController = function AppController() {
     function start_session(event) {
 	hide_start_and_enable_others();
 	play_cadence_this_time = true;
-	total_questions--;
 	play_new_question();
     }
     
