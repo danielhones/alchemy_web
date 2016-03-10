@@ -7,23 +7,9 @@ var AlchemyOptions = function AlchemyOptions() {
     var db_transaction;
     var options_store;
 
-    (function open_database() {
-	console.log("Opening database for options...");
-	var db_request = window.indexedDB.open(ALCHEMY_DATABASE, DATABASE_VERSION);
-	db_request.onerror = function() {
-	    console.log("Couldn't open " + ALCHEMY_DATABASE + " continuing without it");
-	    db = false;
-	};
-	db_request.onupgradeneeded = function(event) {
-	    db = event.target.result;
-	    options_store = db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
-	};
-	db_request.onsuccess = function(event) {
-	    db = event.target.result;
-	    db_transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
-	    options_store = db_transaction.objectStore(ALCHEMY_OPTIONS_STORE);
-	    that.load_values();
-	};
+    (function initialize() {
+	open_database();
+	register_click_functions();
     })();
     
     this.load_values = function() {
@@ -46,5 +32,32 @@ var AlchemyOptions = function AlchemyOptions() {
 	options_store.put({key: "num_notes", value: that.num_notes});
     };
 
+    function open_database() {
+	console.log("Opening database for options...");
+	var db_request = window.indexedDB.open(ALCHEMY_DATABASE, DATABASE_VERSION);
+	db_request.onerror = function() {
+	    console.log("Couldn't open " + ALCHEMY_DATABASE + " continuing without it");
+	    db = false;
+	};
+	db_request.onupgradeneeded = function(event) {
+	    db = event.target.result;
+	    options_store = db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
+	};
+	db_request.onsuccess = function(event) {
+	    db = event.target.result;
+	    db_transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
+	    options_store = db_transaction.objectStore(ALCHEMY_OPTIONS_STORE);
+	    that.load_values();
+	};
+    }
+    
     // TODO: Register functions for options button and modal
+    function register_click_functions() {
+	document.getElementById("options-button").onclick = options_button_click;
+    }
+
+    function options_button_click() {
+	console.log("Options button clicked");
+	show_modal("options-view");
+    }
 };
