@@ -10,7 +10,7 @@ var AlchemyOptions = function AlchemyOptions() {
     })();
     
     this.load_values = function() {
-	if (!options_store) { return; }
+	if (!db) { return; }
 
 	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
@@ -27,6 +27,7 @@ var AlchemyOptions = function AlchemyOptions() {
 
     this.save_values = function() {
 	if (!db) { return; }
+	console.log("Saving options to database");
 	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	options_store.put({key: "tonality", value: that.tonality});
@@ -46,8 +47,6 @@ var AlchemyOptions = function AlchemyOptions() {
 	};
 	db_request.onsuccess = function(event) {
 	    db = event.target.result;
-	    var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
-	    var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	    that.load_values();
 	};
     }

@@ -91,6 +91,7 @@ var AppController = function AppController() {
     }
     
     function show_answer(event) {
+	reset_note_buttons();
 	var answer = question.get_answer();
 	set_notes(answer, ANSWER_STATUS);
 	selected_notes = [];
@@ -107,13 +108,12 @@ var AppController = function AppController() {
 	if (wrong_notes.length === 0) {
 	    set_notes(selected_notes, RIGHT_STATUS);
 	    play_new_question();
-	    setTimeout(reset_note_buttons, TIME_AFTER_ANSWER_CHECK);
 	} else {
 	    var right_notes = array_difference(selected_notes, wrong_notes);
 	    console.log("Right notes: ", right_notes);
 	    set_notes(right_notes, RIGHT_STATUS);
 	    set_notes(wrong_notes, WRONG_STATUS);
-	    setTimeout(function(){set_notes(selected_notes, SELECTED_STATUS);}, TIME_AFTER_ANSWER_CHECK);
+	    window.setTimeout(function(){set_notes(selected_notes, SELECTED_STATUS);}, TIME_AFTER_ANSWER_CHECK);
 	}
 
     }
@@ -130,6 +130,7 @@ var AppController = function AppController() {
     }
 
     function play_new_question() {
+	window.setTimeout(reset_note_buttons, TIME_AFTER_ANSWER_CHECK);
 	question.set_tonality(options.tonality);
 	question.play_new_question(options.num_notes, preferences.available_notes[options.tonality]);
     }
