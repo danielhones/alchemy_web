@@ -77,19 +77,24 @@
 
       <!-- modals -->
       <div id="modal-backdrop" style="display: none;">
-	
-	<div id="options-view-wrapper" class="modal-wrapper" style="display: none;">
-	  <div id="options-view" class="modal">
-	    Need modal for options (random cadence, major/minor, etc)
-	  </div>
-	</div>
-	
-	<div id="preferences-view-wrapper" class="modal-wrapper" style="display: none;">
-	  <div id="preferences-view" class="modal">
-	    Need modal for the note preferences
-	  </div>
-	</div>
+	<div id="modal-wrapper" style="display: none;">
 
+	  <div id="modal-header">
+	    <h2 id="modal-header-title"></h2>
+	    <button id="modal-close-button">X</button>
+	  </div>
+
+	  <div id="modal-body">
+	    <div id="options-view" data-title="Alchemy Options" class="modal-content" style="display: none;">
+	      Need modal for options (random cadence, major/minor, etc)
+	    </div>
+	    
+	    <div id="preferences-view" data-title="Alchemy Preferences" class="modal-content" style="display: none;">
+	      Need modal for the note preferences
+	    </div>
+	  </div>
+	  
+	</div>
       </div>
       <!-- end of modals -->
       

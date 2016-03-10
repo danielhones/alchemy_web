@@ -57,7 +57,6 @@ var AlchemyOptions = function AlchemyOptions() {
     }
 
     function options_button_click() {
-	console.log("Options button clicked");
 	show_modal("options-view");
     }
 };

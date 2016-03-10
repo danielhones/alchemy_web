@@ -11,15 +11,27 @@ function array_difference(a, b) {
 
 function show_modal(modal_id) {
     document.getElementById("modal-backdrop").style.display = "block";
+    document.getElementById("modal-wrapper").style.display = "block";
     document.getElementById(modal_id).style.display = "block";
-    document.getElementById(modal_id + "-wrapper").style.display = "block";
+    var modal_title = document.getElementById(modal_id).getAttribute("data-title");
+    if (modal_title) {
+	document.getElementById("modal-header-title").innerHTML = modal_title;
+    }
 }
 
-function hide_modal(modal_id) {
+function hide_modal() {
     document.getElementById("modal-backdrop").style.display = "none";
-    document.getElementById(modal_id).style.display = "none";
-    document.getElementById(modal_id + "-wrapper").style.display = "none";
+    document.getElementById("modal-wrapper").style.display = "none";
+    document.getElementById("modal-header-title").innerHTML = "";
+    var modal_views = document.querySelectorAll("modal-wrapper div.modal-content");
+    for (var i = 0; i < modal_views.length; i++) {
+	modal_views[i].style.display = "none";
+    }
 }
+
+(function() {
+    document.getElementById("modal-close-button").onclick = hide_modal;
+})();
 
 function remove_hover_effect_for_touch_devices(css_name) {
     // From this SO answer - http://stackoverflow.com/a/15439809/3199099
