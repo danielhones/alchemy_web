@@ -7,6 +7,8 @@ var AlchemyPreferences = function AlchemyPreferences() {
     var db;
     var db_transaction;
     var preferences_store;
+    var DB_MAJOR_NOTES_INDEX = "major_available_notes";
+    var DB_MINOR_NOTES_INDEX = "minor_available_notes";
     
     (function open_database() {
 	console.log("Opening database for preferences...");
@@ -23,15 +25,29 @@ var AlchemyPreferences = function AlchemyPreferences() {
 	    db = event.target.result;
 	    db_transaction = db.transaction(ALCHEMY_PREFERENCES_STORE, "readwrite");
 	    preferences_store = db_transaction.objectStore(ALCHEMY_PREFERENCES_STORE);
+	    that.save_values();
 	    that.load_values();
 	};
     })();
     
     this.load_values = function() {
+	if (!preferences_store) { return; }
 	
+	preferences_store.get(DB_MAJOR_NOTES_INDEX).onsuccess = function(event) {
+	    that.available_notes[MAJOR] = event.target.result.value;
+	    console.log("Loaded major notes from db: ", that.available_notes[MAJOR]);
+	};
+	preferences_store.get(DB_MINOR_NOTES_INDEX).onsuccess = function(event) {
+	    that.available_notes[MINOR] = event.target.result.value;
+	    console.log("Loaded minor notes from db: ", that.available_notes[MINOR]);
+	};
     };
     
-    function save_values() {
+    this.save_values = function() {
 	// Don't know yet if this should be public
+	if (!preferences_store) { return; }
+	
+	preferences_store.put({key: DB_MAJOR_NOTES_INDEX, value: that.available_notes[MAJOR]});
+	preferences_store.put({key: DB_MINOR_NOTES_INDEX, value: that.available_notes[MINOR]});
     };
 };

@@ -27,7 +27,8 @@ var AlchemyOptions = function AlchemyOptions() {
     })();
     
     this.load_values = function() {
-	if (!db) { return; }
+	if (!options_store) { return; }
+	
 	options_store.get("tonality").onsuccess = function(event) {
 	    that.tonality = event.target.result.value;
 	    console.log("Loaded tonality from db: ", that.tonality);
@@ -39,10 +40,10 @@ var AlchemyOptions = function AlchemyOptions() {
     };
 
     this.save_values = function() {
-	if (db) {
-	    options_store.put({key: "tonality", value: that.tonality});
-	    options_store.put({key: "num_notes", value: that.num_notes});
-	}
+	if (!options_store) { return; }
+	
+	options_store.put({key: "tonality", value: that.tonality});
+	options_store.put({key: "num_notes", value: that.num_notes});
     };
 
     // TODO: Register functions for options button and modal
