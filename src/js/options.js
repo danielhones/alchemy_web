@@ -7,6 +7,7 @@ var AlchemyOptions = function AlchemyOptions() {
     (function initialize() {
 	open_database();
 	register_modal_functions();
+	document.getElementById("num_notes-select").setAttribute("max", MAX_NUM_NOTES);
     })();
     
     this.load_values = function() {
@@ -26,8 +27,8 @@ var AlchemyOptions = function AlchemyOptions() {
     };
 
     this.save_values = function() {
-	if (!db) { return; }
-	console.log("Saving options to database");
+	if (!db) { return; }  // TODO: Maybe call open_database here?
+	
 	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	options_store.put({key: "tonality", value: that.tonality});
@@ -56,7 +57,7 @@ var AlchemyOptions = function AlchemyOptions() {
 	    that.tonality = parseInt(this.value, 10);
 	    that.save_values();
 	});
-	document.getElementById("num_notes-select").addEventListener("keyup", function(event) {
+	document.getElementById("num_notes-select").addEventListener("change", function(event) {
 	    var new_num_notes = parseInt(this.value, 10);
 	    if (isNaN(new_num_notes)) { return; }
 	    if (new_num_notes > 0 && new_num_notes <= MAX_NUM_NOTES) {
