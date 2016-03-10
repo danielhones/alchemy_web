@@ -41,6 +41,18 @@ var AppController = function AppController() {
 	    note_buttons[i].setAttribute("data-status", "none");
 	    note_buttons[i].onclick = note_button_click;
 	}
+
+	document.getElementById("options-button").onclick = function() {
+	    question.stop_sound();
+	    show_start_and_disable_others();
+	    show_modal("options-view");
+	};
+	document.getElementById("preferences-button").onclick = function() {
+	    question.stop_sound();
+	    show_start_and_disable_others();
+	    show_modal("preferences-view");
+	};
+
     }
 
     function show_start_and_disable_others() {
@@ -118,6 +130,7 @@ var AppController = function AppController() {
     }
 
     function play_new_question() {
+	question.set_tonality(options.tonality);
 	question.play_new_question(options.num_notes, preferences.available_notes[options.tonality]);
     }
 

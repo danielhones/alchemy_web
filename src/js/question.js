@@ -17,6 +17,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
     var cadences = {};
     cadences[MAJOR] = [new Audio('audio/cadences/Cmajor.ogg')];
     cadences[MINOR] = [new Audio('audio/cadences/Cminor.ogg')];
+    var delayed_note_timeout;
     var current_cadence = 0;  // For now we only use the key of C major or minor
     var current_notes = [];
     var tonality = MAJOR;
@@ -45,12 +46,14 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	    return;
 	}
 	console.log("Current notes: ", current_notes);
+	cadences[tonality][current_cadence].currentTime = 0;
 	cadences[tonality][current_cadence].play();
-	setTimeout(that.play_notes, DURATION_OF_CADENCE);
+	delayed_note_timeout = window.setTimeout(that.play_notes, DURATION_OF_CADENCE);
     };
 
     this.play_notes = function() {
 	current_notes.forEach(function(note_index) {
+	    notes[note_index].currentTime = 0;
 	    notes[note_index].play();
 	});
     };
@@ -60,10 +63,11 @@ var AlchemyQuestion = function AlchemyQuestion() {
     };
 
     this.stop_sound = function() {
+	window.clearTimeout(delayed_note_timeout);
+	cadences[tonality][current_cadence].pause();
 	current_notes.forEach(function(note_index) {
-	    notes[note_index].stop();
+	    notes[note_index].pause();
 	});
-	cadences[tonality][current_cadence].stop();
     };
 
     function select_new_notes(num_notes, allowed_notes) {

@@ -23,7 +23,7 @@ function hide_modal() {
     document.getElementById("modal-backdrop").style.display = "none";
     document.getElementById("modal-wrapper").style.display = "none";
     document.getElementById("modal-header-title").innerHTML = "";
-    var modal_views = document.querySelectorAll("modal-wrapper div.modal-content");
+    var modal_views = document.querySelectorAll("#modal-wrapper div.modal-content");
     for (var i = 0; i < modal_views.length; i++) {
 	modal_views[i].style.display = "none";
     }

@@ -1,19 +1,19 @@
 var AlchemyOptions = function AlchemyOptions() {
     this.tonality = MAJOR;
     this.num_notes = 2;
-    var that = this;
-
     var db;
-    var db_transaction;
-    var options_store;
+    var that = this;
 
     (function initialize() {
 	open_database();
-	register_click_functions();
+	register_modal_functions();
     })();
     
     this.load_values = function() {
 	if (!options_store) { return; }
+
+	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
+	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	
 	options_store.get("tonality").onsuccess = function(event) {
 	    that.tonality = event.target.result.value;
@@ -26,8 +26,9 @@ var AlchemyOptions = function AlchemyOptions() {
     };
 
     this.save_values = function() {
-	if (!options_store) { return; }
-	
+	if (!db) { return; }
+	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
+	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	options_store.put({key: "tonality", value: that.tonality});
 	options_store.put({key: "num_notes", value: that.num_notes});
     };
@@ -41,22 +42,28 @@ var AlchemyOptions = function AlchemyOptions() {
 	};
 	db_request.onupgradeneeded = function(event) {
 	    db = event.target.result;
-	    options_store = db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
+	    db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
 	};
 	db_request.onsuccess = function(event) {
 	    db = event.target.result;
-	    db_transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
-	    options_store = db_transaction.objectStore(ALCHEMY_OPTIONS_STORE);
+	    var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
+	    var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	    that.load_values();
 	};
     }
     
-    // TODO: Register functions for options button and modal
-    function register_click_functions() {
-	document.getElementById("options-button").onclick = options_button_click;
-    }
-
-    function options_button_click() {
-	show_modal("options-view");
+    function register_modal_functions() {
+	document.getElementById("tonality-select").addEventListener("change", function(event) {
+	    that.tonality = parseInt(this.value, 10);
+	    that.save_values();
+	});
+	document.getElementById("num_notes-select").addEventListener("keyup", function(event) {
+	    var new_num_notes = parseInt(this.value, 10);
+	    if (isNaN(new_num_notes)) { return; }
+	    if (new_num_notes > 0 && new_num_notes <= MAX_NUM_NOTES) {
+		that.num_notes = new_num_notes;
+		that.save_values();
+	    }
+	});
     }
 };

@@ -12,6 +12,8 @@
     margin: auto;
     margin-top: 10px;
     background: #efefff;
+    border: thin gray solid;
+    border-radius: 8px;
 }
 
 #modal-header {
@@ -35,4 +37,5 @@
 
 #modal-body {
     padding: 4px 8px;
+    margin-bottom: 4px;
 }

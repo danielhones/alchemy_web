@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/buttons-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.6.0/base-min.css&pure/0.6.0/grids-min.css&pure/0.6.0/buttons-min.css&pure/0.6.0/forms-min.css">
     <link rel="stylesheet" href="css/style-min.css">
   </head>
 
@@ -86,7 +86,15 @@
 
 	  <div id="modal-body">
 	    <div id="options-view" data-title="Alchemy Options" class="modal-content" style="display: none;">
-	      Need modal for options (random cadence, major/minor, etc)
+	      <form class="pure-form">
+		<label for="tonality-select">Tonality</label>
+		<select id="tonality-select">
+		  <option value="0">Major</option>
+		  <option value="1">Minor</option>
+		</select>
+		<label for="num_notes-select">Number of notes</label>
+		<input id="num_notes-select" type="">
+	      </form>
 	    </div>
 	    
 	    <div id="preferences-view" data-title="Alchemy Preferences" class="modal-content" style="display: none;">
