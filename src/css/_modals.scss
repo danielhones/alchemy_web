@@ -10,7 +10,7 @@
 #modal-wrapper {
     width: 60%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 16px;
     background: #efefff;
     border: thin gray solid;
     border-radius: 8px;
@@ -38,4 +38,10 @@
 #modal-body {
     padding: 4px 8px;
     margin-bottom: 4px;
+}
+
+@media (max-width: 800px) {
+  #modal-wrapper {
+    width: 90%;
+  }
 }

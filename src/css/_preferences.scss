@@ -1,0 +1,31 @@
+@mixin note_border_and_padding {
+  border: thin black solid;
+  border-radius: 6px;
+  padding: 2px 16px;
+}
+
+#major-available-notes-view, #minor-available-notes-view {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 56px;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+#preferences-view {
+  /* Diatonic notes */
+  div[data-index="0"], div[data-index="2"], div[data-index="4"], div[data-index="5"],
+  div[data-index="7"], div[data-index="9"], div[data-index="11"] {
+    align-self: flex-end;
+    font-weight: bold;
+    @include note_border_and_padding;
+  }
+
+  /* Chromatic notes */
+  div[data-index="1"], div[data-index="3"], div[data-index="6"],
+  div[data-index="8"], div[data-index="10"] {
+    align-self: flex-start;
+    @include note_border_and_padding;
+  }
+}
+

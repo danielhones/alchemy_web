@@ -87,18 +87,31 @@
 	  <div id="modal-body">
 	    <div id="options-view" data-title="Alchemy Options" class="modal-content" style="display: none;">
 	      <form class="pure-form">
-		<label for="tonality-select">Tonality</label>
+		<label for="tonality-select">Tonality</label>&nbsp;
 		<select id="tonality-select">
 		  <option value="0">Major</option>
 		  <option value="1">Minor</option>
-		</select>
-		<label for="num_notes-select">Number of notes</label>
+		</select><br/>
+		<label for="num_notes-select">Number of notes</label>&nbsp;
 		<input id="num_notes-select" type="number" min="1">
 	      </form>
 	    </div>
 	    
 	    <div id="preferences-view" data-title="Alchemy Preferences" class="modal-content" style="display: none;">
-	      Need modal for the note preferences
+	      <div id="major-available-notes-view">
+		<div data-tonality="major" data-index="0">Do</div>
+		<div data-tonality="major" data-index="1">Ra</div>
+		<div data-tonality="major" data-index="2">Re</div>
+		<div data-tonality="major" data-index="3">Me</div>
+		<div data-tonality="major" data-index="4">Mi</div>
+		<div data-tonality="major" data-index="5">Fa</div>
+		<div data-tonality="major" data-index="6">Se</div>
+		<div data-tonality="major" data-index="7">Sol</div>
+		<div data-tonality="major" data-index="8">Le</div>
+		<div data-tonality="major" data-index="9">La</div>
+		<div data-tonality="major" data-index="10">Te</div>
+		<div data-tonality="major" data-index="11">Ti</div>
+	      </div>
 	    </div>
 	  </div>
 	  
