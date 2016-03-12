@@ -1,31 +1,65 @@
-@mixin note_border_and_padding {
-  border: thin black solid;
-  border-radius: 6px;
-  padding: 2px 16px;
-}
-
 #major-available-notes-view, #minor-available-notes-view {
   display: flex;
   flex-flow: row nowrap;
   height: 56px;
   justify-content: space-between;
   margin: 8px;
-}
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
 
-#preferences-view {
+  div[data-index] {
+    border: thin #3f3f3f solid;
+    border-radius: 8px;
+    padding: 2px 16px;
+  }
+  
   /* Diatonic notes */
   div[data-index="0"], div[data-index="2"], div[data-index="4"], div[data-index="5"],
   div[data-index="7"], div[data-index="9"], div[data-index="11"] {
     align-self: flex-end;
-    font-weight: bold;
-    @include note_border_and_padding;
   }
 
   /* Chromatic notes */
   div[data-index="1"], div[data-index="3"], div[data-index="6"],
   div[data-index="8"], div[data-index="10"] {
     align-self: flex-start;
-    @include note_border_and_padding;
+  }
+
+  div[data-enabled="true"] {
+    background: gray;
+    color: black;
+    /* Make it look bold without changing size of container */
+    /* From this SO answer - http://stackoverflow.com/a/14978871/3199099 */
+    text-shadow: 0px 0px 1px black;
+  }
+
+  div[data-enabled="false"] {
+    background: white;
+    color: #333;
+  }
+
+
+  div[data-index]:hover {
+    background: lightgray;
+    cursor: pointer;
+  }
+
+}
+
+#preferences-view {
+  h3 {
+    display: inline-block;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  div.spacer {
+    height: 20px;
   }
 }
+
+
 

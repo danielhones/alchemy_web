@@ -35,6 +35,10 @@ var AlchemyOptions = function AlchemyOptions() {
 	options_store.put({key: "num_notes", value: that.num_notes});
     };
 
+    this.show_modal = function() {
+	show_modal("options-view");
+    };
+
     function open_database() {
 	console.log("Opening database for options...");
 	var db_request = window.indexedDB.open(ALCHEMY_DATABASE, DATABASE_VERSION);

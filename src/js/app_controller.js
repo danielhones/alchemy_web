@@ -21,11 +21,19 @@ var AppController = function AppController() {
     var WRONG_STATUS = "wrong";
     var ANSWER_STATUS = "answer";
     var TIME_AFTER_ANSWER_CHECK = 2000;
+    var KEYBINDINGS = {
+	"Space": check_answer
+    };
     
     var that = this;
 
     this.initialize = function initialize() {
 	register_click_functions();
+	document.addEventListener("keyup", function(event) {
+	    if (KEYBINDINGS.hasOwnProperty(event.code())) {
+		KEYBINDINGS[event.code]();
+	    }
+	});
 	show_start_and_disable_others();
     };
 
@@ -45,14 +53,13 @@ var AppController = function AppController() {
 	document.getElementById("options-button").onclick = function() {
 	    question.stop_sound();
 	    show_start_and_disable_others();
-	    show_modal("options-view");
+	    options.show_modal();
 	};
 	document.getElementById("preferences-button").onclick = function() {
 	    question.stop_sound();
 	    show_start_and_disable_others();
-	    show_modal("preferences-view");
-	};
-
+	    preferences.show_modal();
+	};	
     }
 
     function show_start_and_disable_others() {
