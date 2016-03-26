@@ -79,14 +79,12 @@ var AlchemyPreferences = function AlchemyPreferences() {
 	    that.available_notes[note_tonality].push(note_index);
 	    that.available_notes[note_tonality].sort(sort_number);
 	}
-	console.log(that.available_notes[note_tonality]);
 	that.save_values();
 	update_preferences_view();
     }
 
     function update_preferences_view() {
 	for (var i = 0; i < preferences_note_buttons.length; i++) {
-	    console.log("Looking at ", preferences_note_buttons[i]);
 	    var note_tonality = preferences_note_buttons[i].getAttribute("data-tonality");
 	    var note_index = parseInt(preferences_note_buttons[i].getAttribute("data-index"), 10);
 	    if (that.available_notes[note_tonality].indexOf(note_index) >= 0) {

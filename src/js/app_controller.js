@@ -22,15 +22,27 @@ var AppController = function AppController() {
     var ANSWER_STATUS = "answer";
     var TIME_AFTER_ANSWER_CHECK = 2000;
     var KEYBINDINGS = {
-	"Space": check_answer
+	"Space": check_answer,
+	"KeyZ": reset_note_buttons,
+	"Enter": hide_start_and_enable_others
     };
     
     var that = this;
 
     this.initialize = function initialize() {
 	register_click_functions();
+
+	document.addEventListener("keydown", function(event) {
+	    var no_mod_keys = !(event.altKey || event.ctrlKey || event.metaKey || event.shiftKey);
+	    if (KEYBINDINGS.hasOwnProperty(event.code) && no_mod_keys) {
+		event.preventDefault();
+	    }
+	});
+	
 	document.addEventListener("keyup", function(event) {
-	    if (KEYBINDINGS.hasOwnProperty(event.code())) {
+	    var no_mod_keys = !(event.altKey || event.ctrlKey || event.metaKey || event.shiftKey);
+	    if (KEYBINDINGS.hasOwnProperty(event.code) && no_mod_keys) {
+		event.preventDefault();
 		KEYBINDINGS[event.code]();
 	    }
 	});

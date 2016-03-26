@@ -24,6 +24,7 @@ var AlchemyOptions = function AlchemyOptions() {
 	    that.num_notes = event.target.result.value;
 	    console.log("Loaded num_notes from db: ", that.num_notes);
 	};
+	update_view();
     };
 
     this.save_values = function() {
@@ -33,6 +34,7 @@ var AlchemyOptions = function AlchemyOptions() {
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	options_store.put({key: "tonality", value: that.tonality});
 	options_store.put({key: "num_notes", value: that.num_notes});
+	update_view();
     };
 
     this.show_modal = function() {
@@ -54,6 +56,12 @@ var AlchemyOptions = function AlchemyOptions() {
 	    db = event.target.result;
 	    that.load_values();
 	};
+    }
+
+    function update_view() {
+	console.log("tonality -", that.tonality, "  num_notes -", that.num_notes);
+	document.getElementById("tonality-select").value = that.tonality.toString();
+	document.getElementById("num_notes-select").value = that.num_notes.toString();
     }
     
     function register_modal_functions() {
