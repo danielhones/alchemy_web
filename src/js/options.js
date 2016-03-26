@@ -17,19 +17,18 @@ var AlchemyOptions = function AlchemyOptions() {
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	
 	options_store.get("tonality").onsuccess = function(event) {
-	    that.tonality = event.target.result.value;
+	    set_tonality(event.target.result.value);
 	    console.log("Loaded tonality from db: ", that.tonality);
 	};
 	options_store.get("num_notes").onsuccess = function(event) {
-	    that.num_notes = event.target.result.value;
+	    set_num_notes(event.target.result.value);
 	    console.log("Loaded num_notes from db: ", that.num_notes);
 	};
-	update_view();
     };
 
     this.save_values = function() {
 	if (!db) { return; }  // TODO: Maybe call open_database here?
-	
+	console.log("saving values...");
 	var transaction = db.transaction(ALCHEMY_OPTIONS_STORE, "readwrite");
 	var options_store = transaction.objectStore(ALCHEMY_OPTIONS_STORE);
 	options_store.put({key: "tonality", value: that.tonality});
@@ -58,24 +57,35 @@ var AlchemyOptions = function AlchemyOptions() {
 	};
     }
 
+    function set_num_notes(num) {
+	if (isNaN(new_num_notes)) {
+	    console.error("Tried to set num_notes to invalid value:", new_num_notes);
+	    return;
+	}
+	if (new_num_notes > 0 && new_num_notes <= MAX_NUM_NOTES) {
+	    that.num_notes = num;
+	    that.save_values();
+	    update_view();
+	}
+    }
+
+    function set_tonality(new_tonality) {
+	that.tonality = new_tonality;
+	that.save_values();
+	update_view();
+    }
+
     function update_view() {
-	console.log("tonality -", that.tonality, "  num_notes -", that.num_notes);
 	document.getElementById("tonality-select").value = that.tonality.toString();
 	document.getElementById("num_notes-select").value = that.num_notes.toString();
     }
     
     function register_modal_functions() {
 	document.getElementById("tonality-select").addEventListener("change", function(event) {
-	    that.tonality = parseInt(this.value, 10);
-	    that.save_values();
+	    set_tonality(parseInt(this.value, 10));
 	});
 	document.getElementById("num_notes-select").addEventListener("change", function(event) {
-	    var new_num_notes = parseInt(this.value, 10);
-	    if (isNaN(new_num_notes)) { return; }
-	    if (new_num_notes > 0 && new_num_notes <= MAX_NUM_NOTES) {
-		that.num_notes = new_num_notes;
-		that.save_values();
-	    }
+	    set_num_notes(parseInt(this.value, 10));
 	});
     }
 };

@@ -88,7 +88,6 @@ var AlchemyPreferences = function AlchemyPreferences() {
 	    var note_tonality = preferences_note_buttons[i].getAttribute("data-tonality");
 	    var note_index = parseInt(preferences_note_buttons[i].getAttribute("data-index"), 10);
 	    if (that.available_notes[note_tonality].indexOf(note_index) >= 0) {
-		console.log("true");
 		preferences_note_buttons[i].setAttribute("data-enabled", "true");
 	    } else {
 		
