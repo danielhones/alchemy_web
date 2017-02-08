@@ -1,3 +1,17 @@
+/* 
+Enable/disable logging level functions
+
+adapted from here - http://stackoverflow.com/a/32946159
+*/
+
+debug = function() { console.log.apply(console, Array.prototype.concat.apply(["DEBUG:"], arguments)); };
+// debug = function() {};
+info = function() { console.log.apply(console, Array.prototype.concat.apply(["INFO:"], arguments)); };
+// info = function() {};
+warn = function() { console.log.apply(console, Array.prototype.concat.apply(["WARN:"], arguments)); };
+// warn = function() {};
+
+
 // Handle IndexedDB in all browsers
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 

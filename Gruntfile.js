@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 	    app: {
 		src: ['src/js/constants.js',
 		      'src/js/utilities.js',
+                      'src/js/db_handler.js',
 		      'src/js/options.js',
 		      'src/js/preferences.js',
 		      'src/js/question.js',
