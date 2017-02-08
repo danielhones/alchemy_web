@@ -10,12 +10,20 @@ var AlchemyPreferences = function AlchemyPreferences() {
         
     this.load_values = function() {
 	DbHandler.preferences.get(DB_MAJOR_NOTES_INDEX, function(event) {
-	    that.available_notes[MAJOR] = event.target.result.value;
-	    debug("Loaded major notes from db: ", that.available_notes[MAJOR]);
+            if (event.target.result) {
+	        that.available_notes[MAJOR] = event.target.result.value;
+                debug("Loaded major notes from db: ", that.available_notes[MAJOR]);
+            } else {
+	        DbHandler.preferences.put(DB_MAJOR_NOTES_INDEX, that.available_notes[MAJOR]);
+            }
 	});
 	DbHandler.preferences.get(DB_MINOR_NOTES_INDEX, function(event) {
-	    that.available_notes[MINOR] = event.target.result.value;
-	    debug("Loaded minor notes from db: ", that.available_notes[MINOR]);
+            if (event.target.result) {
+	        that.available_notes[MINOR] = event.target.result.value;
+	        debug("Loaded minor notes from db: ", that.available_notes[MINOR]);
+            } else {
+	        DbHandler.preferences.put(DB_MINOR_NOTES_INDEX, that.available_notes[MINOR]);
+            }
 	});
 	update_preferences_view();
     };

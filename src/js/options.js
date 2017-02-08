@@ -5,12 +5,22 @@ var AlchemyOptions = function AlchemyOptions() {
 
     this.load_values = function() {
 	DbHandler.options.get("tonality", function(event) {
-	    set_tonality(event.target.result.value);
-	    debug("Loaded tonality from db: ", that.tonality);
+            if (event.target.result) {
+	        set_tonality(event.target.result.value);
+	        debug("Loaded tonality from db: ", that.tonality);
+            } else {
+                DbHandler.options.put("tonality", that.tonality);
+                debug("Set default tonality");
+            }
 	});
 	DbHandler.options.get("num_notes", function(event) {
-	    set_num_notes(event.target.result.value);
-	    debug("Loaded num_notes from db: ", that.num_notes);
+            if (event.target.result) {
+	        set_num_notes(event.target.result.value);
+	        debug("Loaded num_notes from db: ", that.num_notes);
+            } else {
+                DbHandler.options.put("num_notes", that.num_notes);
+                debug("Set default num_notes");
+            }
 	});
     };
 
