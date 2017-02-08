@@ -4,11 +4,12 @@ Enable/disable logging level functions
 adapted from here - http://stackoverflow.com/a/32946159
 */
 
-debug = console.log;
+
+debug = function() { console.log.apply(console, Array.prototype.concat.apply(["DEBUG:"], arguments)); };
 // debug = function() {};
-info = console.info;
+info = function() { console.log.apply(console, Array.prototype.concat.apply(["INFO:"], arguments)); };
 // info = function() {};
-warn = console.warn;
+warn = function() { console.log.apply(console, Array.prototype.concat.apply(["WARN:"], arguments)); };
 // warn = function() {};
 
 
