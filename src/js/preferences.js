@@ -48,7 +48,11 @@ var AlchemyPreferences = function AlchemyPreferences() {
 	};
 	db_request.onupgradeneeded = function(event) {
 	    db = event.target.result;
-	    db.createObjectStore(ALCHEMY_PREFERENCES_STORE, {keyPath: "key"});
+            try {
+	        db.createObjectStore(ALCHEMY_PREFERENCES_STORE, {keyPath: "key"});
+            } catch (e) {
+                //
+            }
 	};
 	db_request.onsuccess = function(event) {
 	    db = event.target.result;

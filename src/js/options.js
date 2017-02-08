@@ -49,7 +49,11 @@ var AlchemyOptions = function AlchemyOptions() {
 	};
 	db_request.onupgradeneeded = function(event) {
 	    db = event.target.result;
-	    db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
+            try {
+	        db.createObjectStore(ALCHEMY_OPTIONS_STORE, {keyPath: "key"});
+            } catch (e) {
+                //
+            }
 	};
 	db_request.onsuccess = function(event) {
 	    db = event.target.result;
@@ -57,13 +61,13 @@ var AlchemyOptions = function AlchemyOptions() {
 	};
     }
 
-    function set_num_notes(num) {
+    function set_num_notes(new_num_notes) {
 	if (isNaN(new_num_notes)) {
 	    console.error("Tried to set num_notes to invalid value:", new_num_notes);
 	    return;
 	}
 	if (new_num_notes > 0 && new_num_notes <= MAX_NUM_NOTES) {
-	    that.num_notes = num;
+	    that.num_notes = new_num_notes;
 	    that.save_values();
 	    update_view();
 	}
