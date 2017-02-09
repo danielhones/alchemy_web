@@ -1,5 +1,4 @@
 var AlchemyQuestion = function AlchemyQuestion() {
-    var DURATION_OF_CADENCE = 4000;
     var notes = [
 	new Audio('audio/notes/C4.ogg'),
 	new Audio('audio/notes/Db4.ogg'),
@@ -45,10 +44,14 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	if (current_notes.length === 0) {
 	    return;
 	}
-	console.log("Current notes: ", current_notes);
-	cadences[tonality][current_cadence].currentTime = 0;
-	cadences[tonality][current_cadence].play();
-	delayed_note_timeout = window.setTimeout(that.play_notes, DURATION_OF_CADENCE);
+	info("Current notes: ", current_notes);
+        c = cadences[tonality][current_cadence];
+	c.currentTime = 0;
+        c.addEventListener('ended', function(e) {
+            this.removeEventListener('ended', arguments.callee);
+            that.play_notes();
+        });
+	c.play();
     };
 
     this.play_notes = function() {
