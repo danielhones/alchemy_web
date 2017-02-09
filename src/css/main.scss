@@ -28,8 +28,21 @@ body {
     margin: 0;
     letter-spacing: 1px;
     font-weight: normal;
+    text-align: center;
 }
 
 #page-wrapper {
     letter-spacing: 0em;
+}
+
+#app-view {
+    padding-top: 16px;
+}
+
+@media (max-width: 800px) {
+    #page-header h1 {
+        font-size: 24px;
+        text-align: left;
+        line-height: 40px;
+    }
 }

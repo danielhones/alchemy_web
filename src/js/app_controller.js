@@ -5,7 +5,7 @@ var AppController = function AppController() {
     var show_answer_button = document.getElementById("show-answer-button");
     var check_answer_button = document.getElementById("check-answer-button");
     var start_button = document.getElementById("start-button");
-    var app_buttons = document.querySelectorAll("#app-buttons button");
+    var app_buttons = document.querySelectorAll("#app-buttons button.app-button");
     var note_buttons = document.querySelectorAll("#notes-container button[id^=note]");
 
     var options = new AlchemyOptions();

@@ -62,7 +62,6 @@ button[data-status=answer] {
     justify-content: center;
 }
 
-
 #notes-and-buttons-view {
     display: flex;
     flex-flow: row nowrap;
@@ -72,4 +71,9 @@ button[data-status=answer] {
     #notes-container div[id^=note] {
 	font-size: 1.4em;
     }
+
+    #notes-and-buttons-view-wrapper {
+        justify-content: flex-start;
+        padding-left: 1em;
+    }    
 }

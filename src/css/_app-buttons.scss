@@ -16,6 +16,7 @@
     margin-top: 3px;
     margin-bottom: 7px;
     width: 100%;
+    flex-basis: 1;
 }
 
 #app-buttons hr {
@@ -26,10 +27,20 @@
     width: 4em !important;
 }
 
-
+.vertical-expand {
+    min-height: 20px;
+}
 
 @media (max-width: 800px) {
     #app-buttons div[id$=button] {
 	font-size: 1.2em;
+    }
+
+    #app-buttons-wrapper {
+        margin-right: 2em;
+    }
+
+    #app-buttons button[id$=button], #app-buttons hr {
+        width: 90%;
     }
 }
