@@ -97,7 +97,7 @@ DbHandler = {
 
 DbHandler.init();
 
-DbHandler.preferences = {
+DbHandler.note_preferences = {
     get: function(key, callback) {
         DbHandler.get(ALCHEMY_PREFERENCES_STORE, key, callback);
     },

@@ -9,7 +9,7 @@ var AppController = function AppController() {
     var note_buttons = document.querySelectorAll("#notes-container button[id^=note]");
 
     var options = new AlchemyOptions();
-    var preferences = new AlchemyPreferences();
+    var note_preferences = new NotePreferences();
     var question = new AlchemyQuestion();
     var selected_notes = [];  // This is an array containing the indexes of selected note buttons
     var play_cadence_this_time = true;
@@ -67,10 +67,10 @@ var AppController = function AppController() {
 	    show_start_and_disable_others();
 	    options.show_modal();
 	};
-	document.getElementById("preferences-button").onclick = function() {
+	document.getElementById("available-notes-button").onclick = function() {
 	    question.stop_sound();
 	    show_start_and_disable_others();
-	    preferences.show_modal();
+	    note_preferences.show_modal();
 	};	
     }
 
@@ -151,7 +151,7 @@ var AppController = function AppController() {
     function play_new_question() {
 	window.setTimeout(reset_note_buttons, TIME_AFTER_ANSWER_CHECK);
 	question.set_tonality(options.tonality);
-	question.play_new_question(options.num_notes, preferences.available_notes[options.tonality]);
+	question.play_new_question(options.num_notes, note_preferences.available_notes[options.tonality]);
     }
 
     function note_button_click(event) {

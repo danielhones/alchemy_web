@@ -1,4 +1,4 @@
-var AlchemyPreferences = function AlchemyPreferences() {
+var NotePreferences = function NotePreferences() {
     this.available_notes = {};
     this.available_notes[MAJOR] = MAJOR_DIATONIC_NOTES;
     this.available_notes[MINOR] = MINOR_DIATONIC_NOTES;
@@ -6,23 +6,23 @@ var AlchemyPreferences = function AlchemyPreferences() {
     
     var DB_MAJOR_NOTES_INDEX = "major_available_notes";
     var DB_MINOR_NOTES_INDEX = "minor_available_notes";
-    var preferences_note_buttons = document.querySelectorAll("#preferences-view div[data-index]");
+    var preferences_note_buttons = document.querySelectorAll("#note-preferences-view div[data-index]");
         
     this.load_values = function() {
-	DbHandler.preferences.get(DB_MAJOR_NOTES_INDEX, function(event) {
+	DbHandler.note_preferences.get(DB_MAJOR_NOTES_INDEX, function(event) {
             if (event.target.result) {
 	        that.available_notes[MAJOR] = event.target.result.value;
                 debug("Loaded major notes from db: ", that.available_notes[MAJOR]);
             } else {
-	        DbHandler.preferences.put(DB_MAJOR_NOTES_INDEX, that.available_notes[MAJOR]);
+	        DbHandler.note_preferences.put(DB_MAJOR_NOTES_INDEX, that.available_notes[MAJOR]);
             }
 	});
-	DbHandler.preferences.get(DB_MINOR_NOTES_INDEX, function(event) {
+	DbHandler.note_preferences.get(DB_MINOR_NOTES_INDEX, function(event) {
             if (event.target.result) {
 	        that.available_notes[MINOR] = event.target.result.value;
 	        debug("Loaded minor notes from db: ", that.available_notes[MINOR]);
             } else {
-	        DbHandler.preferences.put(DB_MINOR_NOTES_INDEX, that.available_notes[MINOR]);
+	        DbHandler.note_preferences.put(DB_MINOR_NOTES_INDEX, that.available_notes[MINOR]);
             }
 	});
 	update_preferences_view();
@@ -34,8 +34,8 @@ var AlchemyPreferences = function AlchemyPreferences() {
     })();
     
     this.save_values = function() {
-	DbHandler.preferences.put(DB_MAJOR_NOTES_INDEX, that.available_notes[MAJOR]);
-	DbHandler.preferences.put(DB_MINOR_NOTES_INDEX, that.available_notes[MINOR]);
+	DbHandler.note_preferences.put(DB_MAJOR_NOTES_INDEX, that.available_notes[MAJOR]);
+	DbHandler.note_preferences.put(DB_MINOR_NOTES_INDEX, that.available_notes[MINOR]);
     };
 
     function register_click_functions() {
@@ -46,7 +46,7 @@ var AlchemyPreferences = function AlchemyPreferences() {
 
     this.show_modal = function() {
 	update_preferences_view();
-	show_modal("preferences-view");
+	show_modal("note-preferences-view");
     };
     
     function update_available_notes(event) {
