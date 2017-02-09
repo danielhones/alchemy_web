@@ -27,10 +27,6 @@
     width: 4em !important;
 }
 
-.vertical-expand {
-    min-height: 20px;
-}
-
 @media (max-width: 800px) {
     #app-buttons div[id$=button] {
 	font-size: 1.2em;

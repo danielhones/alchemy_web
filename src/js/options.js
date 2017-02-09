@@ -1,6 +1,6 @@
 var AlchemyOptions = function AlchemyOptions() {
     this.tonality = MAJOR;
-    this.num_notes = 2;
+    this.num_notes = 1;
     var that = this;
 
     this.load_values = function() {

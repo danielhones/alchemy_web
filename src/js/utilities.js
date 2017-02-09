@@ -35,6 +35,7 @@ function show_modal(modal_id) {
     var modal_title = document.getElementById(modal_id).getAttribute("data-title");
     if (modal_title) {
 	document.getElementById("modal-header-title").innerHTML = modal_title;
+	document.getElementById("modal-wrapper").setAttribute("data-modal-showing", modal_id);
     }
 }
 
