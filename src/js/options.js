@@ -72,3 +72,6 @@ var AlchemyOptions = function AlchemyOptions() {
 	});
     }
 };
+
+
+exports.AlchemyOptions = AlchemyOptions;

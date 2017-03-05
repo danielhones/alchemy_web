@@ -14,7 +14,9 @@ warn = function() { console.log.apply(console, Array.prototype.concat.apply(["WA
 
 
 // Handle IndexedDB in all browsers
-window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+if (typeof window !== 'undefined') {
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+};
 
 
 // From this StackOverflow answer - http://stackoverflow.com/a/1063027/3199099
@@ -23,7 +25,7 @@ function sort_number(a, b) {
 }
 
 function array_difference(a, b) {
-    // Return array of elements that are a but not in b (a - b)
+    // Return array of elements that are in a but not in b (a - b)
     // from this SO answer - http://stackoverflow.com/a/4026828/3199099
     return a.filter(function(i) { return b.indexOf(i) < 0; });
 }
@@ -50,7 +52,9 @@ function hide_modal() {
 }
 
 (function() {
-    document.getElementById("modal-close-button").onclick = hide_modal;
+    if (typeof document !== 'undefined') {
+        document.getElementById("modal-close-button").onclick = hide_modal;
+    }
 })();
 
 function remove_hover_effect_for_touch_devices(css_name) {
@@ -78,5 +82,12 @@ function remove_hover_effect_for_touch_devices(css_name) {
     }
 }
 
-// Add cookie handler function
 
+exports.debug = debug;
+exports.info = info;
+exports.warn = warn;
+exports.sort_number = sort_number;
+exports.array_difference = array_difference;
+exports.show_modal = show_modal;
+exports.hide_modal = hide_modal;
+exports.remove_hover_effect_for_touch_devices = remove_hover_effect_for_touch_devices;

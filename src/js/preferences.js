@@ -84,3 +84,6 @@ var AlchemyPreferences = function AlchemyPreferences() {
 	that.save_values();
     };
 };
+
+
+exports.AlchemyPreferences = AlchemyPreferences;

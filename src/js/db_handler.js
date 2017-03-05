@@ -114,3 +114,6 @@ DbHandler.options = {
         DbHandler.put(ALCHEMY_OPTIONS_STORE, key, value);
     }
 };
+
+
+exports.DbHandler = DbHandler;

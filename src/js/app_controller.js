@@ -182,3 +182,6 @@ var AppController = function AppController() {
 remove_hover_effect_for_touch_devices("/css/style-min.css");
 var app = new AppController();
 app.initialize();
+
+
+exports.AppController = AppController;
