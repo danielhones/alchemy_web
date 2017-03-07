@@ -35,7 +35,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
     };
 
     this.play_new_question = function(num_notes, allowed_notes) {
-	select_new_notes(num_notes, allowed_notes);
+	that.select_new_notes(num_notes, allowed_notes);
 	that.play_question();
     };
 
@@ -71,7 +71,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	});
     };
 
-    function select_new_notes(num_notes, allowed_notes) {
+    this.select_new_notes = function(num_notes, allowed_notes) {
 	var available_notes = allowed_notes.slice();
 	that.current_notes = [];
 	
