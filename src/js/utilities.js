@@ -14,9 +14,7 @@ warn = function() { console.log.apply(console, Array.prototype.concat.apply(["WA
 
 
 // Handle IndexedDB in all browsers
-if (typeof window !== 'undefined') {
-    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-};
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
 
 // From this StackOverflow answer - http://stackoverflow.com/a/1063027/3199099
@@ -25,7 +23,7 @@ function sort_number(a, b) {
 }
 
 function array_difference(a, b) {
-    // Return array of elements that are in a but not in b (a - b)
+    // Return array of elements that are in a but not in b
     // from this SO answer - http://stackoverflow.com/a/4026828/3199099
     return a.filter(function(i) { return b.indexOf(i) < 0; });
 }
@@ -52,9 +50,7 @@ function hide_modal() {
 }
 
 (function() {
-    if (typeof document !== 'undefined') {
-        document.getElementById("modal-close-button").onclick = hide_modal;
-    }
+    document.getElementById("modal-close-button").onclick = hide_modal;
 })();
 
 function remove_hover_effect_for_touch_devices(css_name) {

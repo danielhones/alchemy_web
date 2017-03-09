@@ -29,7 +29,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
 	if (answer.length !== that.current_notes.length) {
 	    return false;
 	}
-	console.log("Checking answer: ", answer);
+	debug("Checking answer: ", answer);
 	var wrong_notes = array_difference(answer, that.current_notes);
 	return wrong_notes;
     };
@@ -61,7 +61,7 @@ var AlchemyQuestion = function AlchemyQuestion() {
     };
 
     this.get_answer = function() {
-	return that.current_notes;
+	return that.current_notes.slice();
     };
 
     this.stop_sound = function() {

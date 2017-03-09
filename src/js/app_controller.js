@@ -120,9 +120,9 @@ var AppController = function AppController() {
 	if (selected_notes.length === 0) {
 	    return;
 	}
-	
+
 	var wrong_notes = question.check_answer(selected_notes);
-	console.log("Wrong notes: ", wrong_notes);
+	debug("Wrong notes: ", wrong_notes);
 
 	if (wrong_notes.length === 0) {
 	    set_notes(selected_notes, RIGHT_STATUS);
@@ -134,7 +134,6 @@ var AppController = function AppController() {
 	    set_notes(wrong_notes, WRONG_STATUS);
 	    window.setTimeout(function(){set_notes(selected_notes, SELECTED_STATUS);}, TIME_AFTER_ANSWER_CHECK);
 	}
-
     }
 
     function start_session(event) {
