@@ -1,21 +1,6 @@
-var AlchemyQuestion = function AlchemyQuestion() {
-    var notes = [
-	new Audio('audio/notes/C4.ogg'),
-	new Audio('audio/notes/Db4.ogg'),
-	new Audio('audio/notes/D4.ogg'),
-	new Audio('audio/notes/Eb4.ogg'),
-	new Audio('audio/notes/E4.ogg'),	
-	new Audio('audio/notes/F4.ogg'),
-	new Audio('audio/notes/Gb4.ogg'),
-	new Audio('audio/notes/G4.ogg'),
-	new Audio('audio/notes/Ab4.ogg'),
-	new Audio('audio/notes/A4.ogg'),
-	new Audio('audio/notes/Bb4.ogg'),
-	new Audio('audio/notes/B4.ogg')
-    ];
-    this.cadences = {};
-    this.cadences[MAJOR] = [new Audio('audio/cadences/Cmajor.ogg')];
-    this.cadences[MINOR] = [new Audio('audio/cadences/Cminor.ogg')];
+var AlchemyQuestion = function AlchemyQuestion(notes, cadences) {
+    var notes = notes;
+    this.cadences = cadences;
     this.current_cadence = 0;  // For now we only use the key of C major or minor
     this.current_notes = [];
     this.tonality = MAJOR;

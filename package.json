@@ -1,6 +1,7 @@
 {
   "name": "alchemy_web",
   "version": "1.0.0",
+  "private": true,
   "description": "Web-based and mobile-friendly version of Alchemy Ear Training",
   "main": "Gruntfile.js",
   "scripts": {

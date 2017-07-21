@@ -10,7 +10,24 @@ var AppController = function AppController() {
 
     var options = new AlchemyOptions();
     var preferences = new AlchemyPreferences();
-    var question = new AlchemyQuestion();
+    var notes = [
+	new Audio('audio/notes/C4.ogg'),
+	new Audio('audio/notes/Db4.ogg'),
+	new Audio('audio/notes/D4.ogg'),
+	new Audio('audio/notes/Eb4.ogg'),
+	new Audio('audio/notes/E4.ogg'),
+	new Audio('audio/notes/F4.ogg'),
+	new Audio('audio/notes/Gb4.ogg'),
+	new Audio('audio/notes/G4.ogg'),
+	new Audio('audio/notes/Ab4.ogg'),
+	new Audio('audio/notes/A4.ogg'),
+	new Audio('audio/notes/Bb4.ogg'),
+	new Audio('audio/notes/B4.ogg')
+    ];
+    var cadences = {};
+    cadences[MAJOR] = [new Audio('audio/cadences/Cmajor.ogg')];
+    cadences[MINOR] = [new Audio('audio/cadences/Cminor.ogg')];
+    var question = new AlchemyQuestion(notes, cadences);
     var selected_notes = [];  // This is an array containing the indexes of selected note buttons
     var play_cadence_this_time = true;
 
