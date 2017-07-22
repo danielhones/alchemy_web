@@ -1,14 +1,15 @@
 run_tests:
   stage: test
   script:
-    - "curl -sL https://deb.nodesource.com/setup_7.x | bash -"
-    - "apt-get update"
-    - "apt-get -y install nodejs npm ruby ruby-sass"
+    - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
+    - sudo apt-add-repository "deb https://deb.nodesource.com/node_7.x $(lsb_release -sc) main"
+    - apt-get update
+    - apt-get -y install nodejs ruby ruby-sass
     - "[ -x $(which nodejs ] && ln -s $(which nodejs) /usr/bin/node"
-    - "npm install -g grunt-cli"
-    - "npm install"
-    - "grunt build"
-    - "npm test > test_result.txt"
+    - npm install -g grunt-cli
+    - npm install
+    - grunt build
+    - npm test > test_result.txt
   artifacts:
     paths:
     - test_result.txt
