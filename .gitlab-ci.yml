@@ -1,9 +1,10 @@
 run_tests:
   stage: test
   script:
+    - "curl -sL https://deb.nodesource.com/setup_7.x | bash -"
     - "apt-get update"
     - "apt-get -y install nodejs npm ruby ruby-sass"
-    - "ln -s $(which nodejs) /usr/bin/node"
+    - "[ -x $(which nodejs ] && ln -s $(which nodejs) /usr/bin/node"
     - "npm install -g grunt-cli"
     - "npm install"
     - "grunt build"
