@@ -1,6 +1,7 @@
 run_tests:
   stage: test
   script:
+    - apt-get update
     - apt-get install -y software-properties-common ruby ruby-sass
     - curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
     - add-apt-repository -y -r ppa:chris-lea/node.js
