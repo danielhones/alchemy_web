@@ -1,0 +1,25 @@
+stages:
+  - build
+  - test
+
+
+setup:
+  stage: build
+  script:
+  - "apt-get update"
+  - "apt-get -y install nodejs npm ruby ruby-sass"
+  - "ln -s $(which nodejs) /usr/bin/node"
+  - "npm install -g grunt-cli"
+  - "npm install"
+  - "grunt build"
+
+
+run_tests:
+  stage: test
+  script:
+    - "npm test > test_result.txt"
+  artifacts:
+    paths:
+    - test_result.txt
+
+

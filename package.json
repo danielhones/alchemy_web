@@ -5,7 +5,7 @@
   "description": "Web-based and mobile-friendly version of Alchemy Ear Training",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R spec"
   },
   "author": "Daniel Hones",
   "license": "MIT",
