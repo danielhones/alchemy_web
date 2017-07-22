@@ -1,8 +1,9 @@
 run_tests:
   stage: test
   script:
+    - apt-get install lsb-release
     - apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
-    - apt-add-repository "deb https://deb.nodesource.com/node_7.x $(lsb_release -sc) main"
+    - add-apt-repository "deb https://deb.nodesource.com/node_7.x $(lsb_release -sc) main"
     - apt-get update
     - apt-get -y install nodejs ruby ruby-sass
     - "[ -x $(which nodejs ] && ln -s $(which nodejs) /usr/bin/node"
