@@ -1,10 +1,11 @@
 run_tests:
   stage: test
   script:
+    - apt-get install -y software-properties-common ruby ruby-sass
     - curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
     - add-apt-repository -y -r ppa:chris-lea/node.js
     - apt-get update
-    - apt-get -y install nodejs ruby ruby-sass
+    - apt-get install -y nodejs
     - "[ -x $(which nodejs ] && ln -s $(which nodejs) /usr/bin/node"
     - npm install -g grunt-cli
     - npm install
