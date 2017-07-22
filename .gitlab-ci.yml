@@ -7,7 +7,7 @@ run_tests:
     - add-apt-repository -y -r ppa:chris-lea/node.js
     - apt-get update
     - apt-get install -y nodejs
-    - "[ -x $(which nodejs ] && ln -s $(which nodejs) /usr/bin/node"
+    - "[ -x $(which nodejs) ] && ln -s $(which nodejs) /usr/bin/node"
     - npm install -g grunt-cli
     - npm install
     - grunt build
